@@ -14,7 +14,7 @@ module.exports = {
 
     plugins: [
 
-        tailwindcss("./tailwind.js"),
+        tailwindcss('./tailwind.js'),
 
         autoprefixer({
             add: true,
@@ -22,10 +22,11 @@ module.exports = {
         }),
 
         //Only add purgecss in production
-        process.env.NODE_ENV === "production"? purgecss({
+        process.env.NODE_ENV === 'production' ? purgecss({
             content: [
-                "./src/**/*.html", 
-                "./src/**/*.vue"
+                "./src/**/*.html",
+                "./src/**/*.vue",
+                "./public/**/*.html",
             ],
             extractors: [
                 {
@@ -33,6 +34,6 @@ module.exports = {
                     extensions: ['html', 'vue']
                 }
             ]
-        }): ""
+        }) : ''
     ]
 };

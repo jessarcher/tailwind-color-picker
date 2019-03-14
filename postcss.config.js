@@ -4,6 +4,12 @@ const autoprefixer = require("autoprefixer");
 
 const purgecss = require("@fullhuman/postcss-purgecss");
 
+class TailwindExtractor {
+  static extract(content) {
+    return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
+  }
+}
+
 module.exports = {
 
     plugins: [
@@ -20,6 +26,12 @@ module.exports = {
             content: [
                 "./src/**/*.html", 
                 "./src/**/*.vue"
+            ],
+            extractors: [
+                {
+                    extractor: TailwindExtractor,
+                    extensions: ['html', 'vue']
+                }
             ]
         }): ""
     ]

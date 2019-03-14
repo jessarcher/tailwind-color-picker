@@ -1,7 +1,10 @@
 <template>
-    <div class="font-sans leading-normal text-grey-darkest bg-grey-lightest">
+    <div class="font-sans leading-normal text-grey-darkest bg-grey-lightest" style="min-width: 830px;">
         <header class="pt-8 text-center">
-            <h1 class="text-3xl text-teal-dark">Tailwind Color Picker</h1>
+            <h1 class="text-3xl text-teal-dark inline-flex items-center">
+                <svg version="1.1" class="w-16 h-16 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><defs><linearGradient id="a" x1="11.797" x2="29.563" y1="3.4576" y2="19.873" gradientUnits="userSpaceOnUse"><stop stop-color="#ae2323" offset="0"/><stop stop-color="#b5ae31" offset=".19492"/><stop stop-color="#42bf45" offset=".38583"/><stop stop-color="#52c5c8" offset=".59914"/><stop stop-color="#6b63d1" offset=".79855"/><stop stop-color="#d76dd4" offset="1"/></linearGradient></defs><path transform="translate(4 12)" d="M10 8c1.333-5.333 4.667-8 10-8 8 0 9 6 13 7 2.667.667 5-.333 7-3-1.333 5.333-4.667 8-10 8-8 0-9-6-13-7-2.667-.667-5 .333-7 3zM0 20c1.333-5.333 4.667-8 10-8 8 0 9 6 13 7 2.667.667 5-.333 7-3-1.333 5.333-4.667 8-10 8-8 0-9-6-13-7-2.667-.667-5 .333-7 3z" fill="url(#a)"/></svg>
+                Tailwind Color Picker
+            </h1>
             <p class="text-grey-dark mb-2">By <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://twitter.com/jessarchercodes">@jessarchercodes</a></p>
             <a href="https://github.com/jessarcher/tailwind-color-picker"><img alt="star this repo" src="https://githubbadges.com/star.svg?user=jessarcher&repo=tailwind-color-picker&style=default"/></a>
             <a href="https://github.com/jessarcher/tailwind-color-picker/fork"><img alt="fork this repo" src="https://githubbadges.com/fork.svg?user=jessarcher&repo=tailwind-color-picker&style=default" class="ml-2" /></a>

@@ -3,8 +3,8 @@
         <header class="pt-8 text-center">
             <h1 class="text-3xl text-teal-dark">Tailwind Color Picker</h1>
             <p class="text-grey-dark mb-2">By <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://twitter.com/jessarchercodes">@jessarchercodes</a></p>
-            <a href="https://github.com/jessarcher/tailwind-color-picker"><img alt="star this repo" src="http://githubbadges.com/star.svg?user=jessarcher&repo=tailwind-color-picker&style=default"/></a>
-            <a href="https://github.com/jessarcher/tailwind-color-picker/fork"><img alt="fork this repo" src="http://githubbadges.com/fork.svg?user=jessarcher&repo=tailwind-color-picker&style=default" class="ml-2" /></a>
+            <a href="https://github.com/jessarcher/tailwind-color-picker"><img alt="star this repo" src="https://githubbadges.com/star.svg?user=jessarcher&repo=tailwind-color-picker&style=default"/></a>
+            <a href="https://github.com/jessarcher/tailwind-color-picker/fork"><img alt="fork this repo" src="https://githubbadges.com/fork.svg?user=jessarcher&repo=tailwind-color-picker&style=default" class="ml-2" /></a>
         </header>
         <div class="flex w-full p-8">
             <div class="flex-1 w-1/2 pb-8">

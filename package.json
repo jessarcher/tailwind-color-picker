@@ -11,6 +11,7 @@
     "vue": "^2.6.6"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.1.0",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
@@ -33,12 +34,6 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": "./tailwind.js",
-      "autoprefixer": {}
     }
   },
   "browserslist": [

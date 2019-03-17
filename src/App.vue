@@ -11,14 +11,17 @@
         </header>
         <div class="flex w-full p-8">
             <div class="flex-1 w-1/2 pb-8">
-                <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Paste Your Config</h2>
+                <div class="flex justify-between items-baseline">
+                    <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Paste Your Config</h2>
+                    <div class="text-sm text-grey-dark">Tailwind Version: {{ tailwindVersion }}</div>
+                </div>
                 <textarea class="leading-normal text-black border rounded p-4 w-full h-full font-mono" v-model="colorDefinition"></textarea>
             </div>
 
             <div class="flex-1 w-1/2 ml-4">
                 <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Tweak Your Colors</h2>
                 <div class="border rounded p-4 bg-white">
-                    <color-picker v-for="color in colors" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
+                    <color-picker v-for="color in colorsFlat" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
                 </div>
             </div>
         </div>
@@ -41,84 +44,144 @@ export default {
 
     data() {
         return {
-            colorDefinition: `let colors = {
-  'transparent': 'transparent',
-  'black': '#22292f',
-  'grey-darkest': '#3d4852',
-  'grey-darker': '#606f7b',
-  'grey-dark': '#8795a1',
-  'grey': '#b8c2cc',
-  'grey-light': '#dae1e7',
-  'grey-lighter': '#f1f5f8',
-  'grey-lightest': '#f8fafc',
-  'white': '#ffffff',
-  'red-darkest': '#3b0d0c',
-  'red-darker': '#621b18',
-  'red-dark': '#cc1f1a',
-  'red': '#e3342f',
-  'red-light': '#ef5753',
-  'red-lighter': '#f9acaa',
-  'red-lightest': '#fcebea',
-  'orange-darkest': '#462a16',
-  'orange-darker': '#613b1f',
-  'orange-dark': '#de751f',
-  'orange': '#f6993f',
-  'orange-light': '#faad63',
-  'orange-lighter': '#fcd9b6',
-  'orange-lightest': '#fff5eb',
-  'yellow-darkest': '#453411',
-  'yellow-darker': '#684f1d',
-  'yellow-dark': '#f2d024',
-  'yellow': '#ffed4a',
-  'yellow-light': '#fff382',
-  'yellow-lighter': '#fff9c2',
-  'yellow-lightest': '#fcfbeb',
-  'green-darkest': '#0f2f21',
-  'green-darker': '#1a4731',
-  'green-dark': '#1f9d55',
-  'green': '#38c172',
-  'green-light': '#51d88a',
-  'green-lighter': '#a2f5bf',
-  'green-lightest': '#e3fcec',
-  'teal-darkest': '#0d3331',
-  'teal-darker': '#20504f',
-  'teal-dark': '#38a89d',
-  'teal': '#4dc0b5',
-  'teal-light': '#64d5ca',
-  'teal-lighter': '#a0f0ed',
-  'teal-lightest': '#e8fffe',
-  'blue-darkest': '#12283a',
-  'blue-darker': '#1c3d5a',
-  'blue-dark': '#2779bd',
-  'blue': '#3490dc',
-  'blue-light': '#6cb2eb',
-  'blue-lighter': '#bcdefa',
-  'blue-lightest': '#eff8ff',
-  'indigo-darkest': '#191e38',
-  'indigo-darker': '#2f365f',
-  'indigo-dark': '#5661b3',
-  'indigo': '#6574cd',
-  'indigo-light': '#7886d7',
-  'indigo-lighter': '#b2b7ff',
-  'indigo-lightest': '#e6e8ff',
-  'purple-darkest': '#21183c',
-  'purple-darker': '#382b5f',
-  'purple-dark': '#794acf',
-  'purple': '#9561e2',
-  'purple-light': '#a779e9',
-  'purple-lighter': '#d6bbfc',
-  'purple-lightest': '#f3ebff',
-  'pink-darkest': '#451225',
-  'pink-darker': '#6f213f',
-  'pink-dark': '#eb5286',
-  'pink': '#f66d9b',
-  'pink-light': '#fa7ea8',
-  'pink-lighter': '#ffbbca',
-  'pink-lightest': '#ffebef',
-}`,
+            tailwindVersion: null,
+            colorDefinition: `    colors: {
+      transparent: 'transparent',
+      black: '#000',
+      white: '#fff',
+      gray: {
+        100: '#f7fafc',
+        200: '#edf2f7',
+        300: '#e2e8f0',
+        400: '#cbd5e0',
+        500: '#a0aec0',
+        600: '#718096',
+        700: '#4a5568',
+        800: '#2d3748',
+        900: '#1a202c',
+      },
+      red: {
+        100: '#fff5f5',
+        200: '#fed7d7',
+        300: '#feb2b2',
+        400: '#fc8181',
+        500: '#f56565',
+        600: '#e53e3e',
+        700: '#c53030',
+        800: '#9b2c2c',
+        900: '#742a2a',
+      },
+      orange: {
+        100: '#fffaf0',
+        200: '#feebc8',
+        300: '#fbd38d',
+        400: '#f6ad55',
+        500: '#ed8936',
+        600: '#dd6b20',
+        700: '#c05621',
+        800: '#9c4221',
+        900: '#7b341e',
+      },
+      yellow: {
+        100: '#fffff0',
+        200: '#fefcbf',
+        300: '#faf089',
+        400: '#f6e05e',
+        500: '#ecc94b',
+        600: '#d69e2e',
+        700: '#b7791f',
+        800: '#975a16',
+        900: '#744210',
+      },
+      green: {
+        100: '#f0fff4',
+        200: '#c6f6d5',
+        300: '#9ae6b4',
+        400: '#68d391',
+        500: '#48bb78',
+        600: '#38a169',
+        700: '#2f855a',
+        800: '#276749',
+        900: '#22543d',
+      },
+      teal: {
+        100: '#e6fffa',
+        200: '#b2f5ea',
+        300: '#81e6d9',
+        400: '#4fd1c5',
+        500: '#38b2ac',
+        600: '#319795',
+        700: '#2c7a7b',
+        800: '#285e61',
+        900: '#234e52',
+      },
+      blue: {
+        100: '#ebf8ff',
+        200: '#bee3f8',
+        300: '#90cdf4',
+        400: '#63b3ed',
+        500: '#4299e1',
+        600: '#3182ce',
+        700: '#2b6cb0',
+        800: '#2c5282',
+        900: '#2a4365',
+      },
+      indigo: {
+        100: '#ebf4ff',
+        200: '#c3dafe',
+        300: '#a3bffa',
+        400: '#7f9cf5',
+        500: '#667eea',
+        600: '#5a67d8',
+        700: '#4c51bf',
+        800: '#434190',
+        900: '#3c366b',
+      },
+      purple: {
+        100: '#faf5ff',
+        200: '#e9d8fd',
+        300: '#d6bcfa',
+        400: '#b794f4',
+        500: '#9f7aea',
+        600: '#805ad5',
+        700: '#6b46c1',
+        800: '#553c9a',
+        900: '#44337a',
+      },
+      pink: {
+        100: '#fff5f7',
+        200: '#fed7e2',
+        300: '#fbb6ce',
+        400: '#f687b3',
+        500: '#ed64a6',
+        600: '#d53f8c',
+        700: '#b83280',
+        800: '#97266d',
+        900: '#702459',
+      },
+    },
+`,
             colors: [],
             indentation: '  ',
         }
+    },
+
+    computed: {
+        colorsFlat() {
+            let colorsFlat = [];
+
+            this.colors.forEach(color => {
+                if (typeof color.variations === 'object') {
+                    color.variations.forEach(variation => {
+                        colorsFlat.push(variation)
+                    });
+                } else {
+                    colorsFlat.push(color)
+                }
+            })
+
+            return colorsFlat
+        },
     },
 
     watch: {
@@ -129,6 +192,22 @@ export default {
 
     methods: {
         load() {
+            if (/^\s*let colors = {/.test(this.colorDefinition)) {
+                this.tailwindVersion = 0.7
+                this.loadv07()
+                return
+            }
+
+            if (/^\s*colors: {/.test(this.colorDefinition)) {
+                this.tailwindVersion = 1
+                this.loadv1()
+                return
+            }
+
+            this.tailwindVersion = 'unknown'
+        },
+
+        loadv07() {
             let colors = Function(this.colorDefinition + '; return colors')();
 
             this.colors = [];
@@ -141,7 +220,47 @@ export default {
             }
         },
 
+        loadv1() {
+            let colors = Function('let theme = {' + this.colorDefinition + '}; return theme.colors')();
+
+            this.colors = [];
+
+            for (let color in colors) {
+                if (typeof colors[color] === 'object') {
+                    let colorWithVariations = {
+                        name: color,
+                        variations: [],
+                    }
+
+                    for (let variation in colors[color]) {
+                        colorWithVariations.variations.push({
+                            name: color + '-' + variation,
+                            variation: variation,
+                            code: colors[color][variation]
+                        })
+                    }
+
+                    this.colors.push(colorWithVariations)
+                } else {
+                    this.colors.push({
+                        name: color,
+                        code: colors[color],
+                    });
+                }
+            }
+        },
+
         dump() {
+            if (this.tailwindVersion === 0.7) {
+                return this.dumpv07();
+            }
+
+            if (this.tailwindVersion === 1) {
+                return this.dumpv1();
+            }
+        },
+
+        dumpv07() {
             this.colorDefinition = "let colors = {\n";
             this.colors.forEach(color => {
                 this.colorDefinition += this.indentation
@@ -149,7 +268,34 @@ export default {
                 this.colorDefinition += "\n";
             })
             this.colorDefinition += "}";
-        }
+        },
+
+        dumpv1() {
+            this.colorDefinition = this.indentation + this.indentation + "colors: {\n";
+            this.colors.forEach(color => {
+                if (typeof color.variations === 'object') {
+                    this.colorDefinition += this.indentation + this.indentation + this.indentation
+                    this.colorDefinition += `${this.wrapPropertyName(color.name)}: {`
+                    this.colorDefinition += "\n";
+                    color.variations.forEach(variation => {
+                        this.colorDefinition += this.indentation + this.indentation + this.indentation + this.indentation
+                        this.colorDefinition += `${this.wrapPropertyName(variation.variation)}: '${variation.code}',`
+                        this.colorDefinition += "\n";
+                    })
+                    this.colorDefinition += this.indentation + this.indentation + this.indentation + "},\n";
+                } else {
+                    this.colorDefinition += this.indentation + this.indentation + this.indentation
+                    this.colorDefinition += `${this.wrapPropertyName(color.name)}: '${color.code}',`
+                    this.colorDefinition += "\n";
+                }
+            })
+            this.colorDefinition += this.indentation + this.indentation;
+            this.colorDefinition += "},";
+        },
+
+        wrapPropertyName(propertyName) {
+            return /^[a-zA-Z0-9_]*$/.test(propertyName) ? propertyName : `'${propertyName}'`
+        },
     },
 
     mounted() {

@@ -21,7 +21,7 @@
             <div class="flex-1 w-1/2 ml-4">
                 <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Tweak Your Colors</h2>
                 <div class="border rounded p-4 bg-white">
-                    <color-picker v-for="color in colorsFlat" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
+                    <color-picker v-for="color in colorsFlat" :key="color.name" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
                 </div>
             </div>
         </div>

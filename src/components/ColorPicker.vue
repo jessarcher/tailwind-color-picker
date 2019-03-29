@@ -92,7 +92,7 @@
                     return;
                 }
 
-                this.$emit('update:color', color.hex)
+                this.$emit('update:color', color.hex.toLowerCase())
                 this.$emit('input')
             },
 

@@ -54,13 +54,26 @@
                     return 'hsl'
                 }
 
+                if (this.color.match(/^rgba.*/) !== null) {
+                    return 'rgba'
+                }
+
+                if (this.color.match(/^rgb.*/) !== null) {
+                    return 'rgb'
+                }
+
                 return 'hex';
             },
         },
 
         methods: {
             updateColor (color) {
-                if (color.a !== 1 || this.inputFormat === 'hsla') {
+                if (color.a !== 1 || this.inputFormat === 'hsla' || this.inputFormat === 'rgba') {
+                    if (this.inputFormat === 'rgb' || this.inputFormat === 'rgba') {
+                        this.$emit('update:color', this.rgba(color))
+                        this.$emit('input')
+                        return;
+                    }
                     this.$emit('update:color', this.hsla(color))
                     this.$emit('input')
                     return;
@@ -68,6 +81,12 @@
 
                 if (this.inputFormat === 'hsl') {
                     this.$emit('update:color', this.hsl(color))
+                    this.$emit('input')
+                    return;
+                }
+
+                if (this.inputFormat === 'rgb') {
+                    this.$emit('update:color', this.rgb(color))
                     this.$emit('input')
                     return;
                 }
@@ -91,6 +110,23 @@
                 let l = Math.round(color.hsl.l * 100)
 
                 return `hsl(${h}, ${s}%, ${l}%)`
+            },
+
+            rgba (color) {
+                let r = color.rgba.r
+                let g = color.rgba.g
+                let b = color.rgba.b
+                let a = color.rgba.a.toPrecision(2).replace(/0+$/, '').replace(/\.$/, '')
+
+                return `rgba(${r}, ${g}, ${b}, ${a})`
+            },
+
+            rgb (color) {
+                let r = color.rgba.r
+                let g = color.rgba.g
+                let b = color.rgba.b
+
+                return `rgb(${r}, ${g}, ${b})`
             },
         }
     }

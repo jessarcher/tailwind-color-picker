@@ -40,7 +40,6 @@
 
         data() {
             return {
-                originalFormat: this.inputFormat,
                 showPicker: false,
             }
         },
@@ -69,8 +68,8 @@
 
         methods: {
             updateColor (color) {
-                if (color.a !== 1 || this.originalFormat === 'hsla' || this.originalFormat === 'rgba') {
-                    if (this.originalFormat === 'rgb' || this.originalFormat === 'rgba') {
+                if (color.a !== 1 || this.inputFormat === 'hsla' || this.inputFormat === 'rgba') {
+                    if (this.inputFormat === 'rgb' || this.inputFormat === 'rgba') {
                         this.$emit('update:color', this.rgba(color))
                         this.$emit('input')
                         return;
@@ -80,13 +79,13 @@
                     return;
                 }
 
-                if (this.originalFormat === 'hsl') {
+                if (this.inputFormat === 'hsl') {
                     this.$emit('update:color', this.hsl(color))
                     this.$emit('input')
                     return;
                 }
 
-                if (this.originalFormat === 'rgb') {
+                if (this.inputFormat === 'rgb') {
                     this.$emit('update:color', this.rgb(color))
                     this.$emit('input')
                     return;

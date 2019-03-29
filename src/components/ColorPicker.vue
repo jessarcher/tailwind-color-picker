@@ -44,17 +44,53 @@
             }
         },
 
+        computed: {
+            inputFormat: function() {
+                if (this.color.match(/^hsla.*/) !== null) {
+                    return 'hsla'
+                }
+
+                if (this.color.match(/^hsl.*/) !== null) {
+                    return 'hsl'
+                }
+
+                return 'hex';
+            },
+        },
+
         methods: {
             updateColor (color) {
+                if (color.a !== 1 || this.inputFormat === 'hsla') {
+                    this.$emit('update:color', this.hsla(color))
+                    this.$emit('input')
+                    return;
+                }
+
+                if (this.inputFormat === 'hsl') {
+                    this.$emit('update:color', this.hsl(color))
+                    this.$emit('input')
+                    return;
+                }
+
+                this.$emit('update:color', color.hex)
+                this.$emit('input')
+            },
+
+            hsla (color) {
                 let h = Math.round(color.hsl.h)
                 let s = Math.round(color.hsl.s * 100)
                 let l = Math.round(color.hsl.l * 100)
                 let a = color.hsl.a.toPrecision(2).replace(/0+$/, '').replace(/\.$/, '')
 
-                let newColor = `hsl(${h}, ${s}%, ${l}%, ${a})`
+                return `hsla(${h}, ${s}%, ${l}%, ${a})`
+            },
 
-                this.$emit('update:color', newColor)
-                this.$emit('input')
+            hsl (color) {
+                let h = Math.round(color.hsl.h)
+                let s = Math.round(color.hsl.s * 100)
+                let l = Math.round(color.hsl.l * 100)
+
+                return `hsl(${h}, ${s}%, ${l}%)`
             },
         }
     }

@@ -1,32 +1,37 @@
 <template>
-    <div class="font-sans leading-normal text-grey-darkest bg-grey-lightest" style="min-width: 830px;">
-        <header class="pt-8 text-center">
+    <div class="flex flex-col min-h-screen max-h-screen font-sans leading-normal text-grey-darkest bg-grey-lightest p-4">
+        <header class="flex justify-between items-center">
             <h1 class="text-3xl text-teal-dark inline-flex items-center">
                 <svg version="1.1" class="w-16 h-16 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><defs><linearGradient id="a" x1="11.797" x2="29.563" y1="3.4576" y2="19.873" gradientUnits="userSpaceOnUse"><stop stop-color="#ae2323" offset="0"/><stop stop-color="#b5ae31" offset=".19492"/><stop stop-color="#42bf45" offset=".38583"/><stop stop-color="#52c5c8" offset=".59914"/><stop stop-color="#6b63d1" offset=".79855"/><stop stop-color="#d76dd4" offset="1"/></linearGradient></defs><path transform="translate(4 12)" d="M10 8c1.333-5.333 4.667-8 10-8 8 0 9 6 13 7 2.667.667 5-.333 7-3-1.333 5.333-4.667 8-10 8-8 0-9-6-13-7-2.667-.667-5 .333-7 3zM0 20c1.333-5.333 4.667-8 10-8 8 0 9 6 13 7 2.667.667 5-.333 7-3-1.333 5.333-4.667 8-10 8-8 0-9-6-13-7-2.667-.667-5 .333-7 3z" fill="url(#a)"/></svg>
                 Tailwind Color Picker
             </h1>
-            <p class="text-grey-dark mb-2">By <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://twitter.com/jessarchercodes">@jessarchercodes</a></p>
-            <a href="https://github.com/jessarcher/tailwind-color-picker"><img alt="star this repo" src="https://githubbadges.com/star.svg?user=jessarcher&repo=tailwind-color-picker&style=default"/></a>
-            <a href="https://github.com/jessarcher/tailwind-color-picker/fork"><img alt="fork this repo" src="https://githubbadges.com/fork.svg?user=jessarcher&repo=tailwind-color-picker&style=default" class="ml-2" /></a>
+            <div>
+                <p class="text-grey-dark mb-2">By <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://twitter.com/jessarchercodes">@jessarchercodes</a></p>
+                <a href="https://github.com/jessarcher/tailwind-color-picker"><img alt="star this repo" src="https://githubbadges.com/star.svg?user=jessarcher&repo=tailwind-color-picker&style=default"/></a>
+                <a href="https://github.com/jessarcher/tailwind-color-picker/fork"><img alt="fork this repo" src="https://githubbadges.com/fork.svg?user=jessarcher&repo=tailwind-color-picker&style=default" class="ml-2" /></a>
+            </div>
         </header>
-        <div class="flex w-full p-8">
-            <div class="flex-1 w-1/2 pb-8">
+        <main class="flex-grow flex mt-4">
+            <div class="flex-1 flex flex-col mr-2">
                 <div class="flex justify-between items-baseline">
                     <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Paste Your Config</h2>
-                    <div class="text-sm text-grey-dark">Tailwind Version: {{ tailwindVersion }}</div>
+                    <div class="text-sm text-grey-dark mr-2">Tailwind Version: <code>{{ tailwindVersion }}</code></div>
                 </div>
-                <textarea class="leading-normal text-black border rounded p-4 w-full h-full font-mono" v-model="colorDefinition"></textarea>
+                <div class="flex-1 relative">
+                    <textarea class="leading-normal text-black border rounded p-4 w-full h-full font-mono" v-model="colorDefinition"></textarea>
+                </div>
             </div>
-
-            <div class="flex-1 w-1/2 ml-4">
+            <div class="flex-1 flex flex-col ml-2">
                 <h2 class="text-sm uppercase tracking-wide mb-2 text-grey-dark">Tweak Your Colors</h2>
-                <div class="border rounded p-4 bg-white">
-                    <color-picker v-for="color in colorsFlat" :key="color.name" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
+                <div class="flex-1 relative">
+                    <div class="absolute pin overflow-y-scroll border rounded bg-white">
+                        <color-picker v-for="color in colorsFlat" :key="color.name" :name.sync="color.name" :color.sync="color.code" @input="dump"></color-picker>
+                    </div>
                 </div>
             </div>
-        </div>
-        <footer class="text-center text-sm mb-2 text-grey-dark">
-            Made with love for <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://tailwindcss.com/">Tailwind CSS</a><br>
+        </main>
+        <footer class="mt-4 text-center text-sm text-grey-dark">
+            Made with love for <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://tailwindcss.com/">Tailwind CSS</a>.
             Hosted with <a class="text-grey-darker font-bold no-underline hover:text-grey-darkest" href="https://netlify.com/">Netlify</a>
         </footer>
     </div>

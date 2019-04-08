@@ -1,5 +1,5 @@
 <template>
-    <div class="flex relative">
+    <div class="flex">
         <!-- <input :value="name" @input="$emit('update:name', $event.target.value); $emit('input')" class="flex-1 border rounded py-2 px-3 mr-4 my-2 text-grey-darkest bg-grey-lightest focus:bg-white"> -->
         <div class="flex-1 text-purple p-5 font-mono">.{{ name }}</div>
         <!-- <input type="color" :value="color" @input="$emit('update:color', $event.target.value); $emit('input')" class="flex-1"> -->
@@ -7,11 +7,18 @@
             <div v-if="color === 'transparent'" class="cursor-not-allowed flex w-full h-full items-center justify-center border text-grey-dark">transparent</div>
             <div v-else class="w-full h-full">
                 <button type="button" @click="showPicker = true" class="w-full h-full" :style="'background-color:' + color"></button>
-                <div v-if="showPicker" class="absolute pin-t pin-l z-50">
-                    <chrome-picker
-                        :value="color"
-                        @input="updateColor"
-                    ></chrome-picker>
+                <div v-if="showPicker" class="fixed pin z-50 flex items-center justify-center" @click="showPicker = false">
+                    <div class="relative text-right" @click.stop>
+                        <button
+                            type="button"
+                            class="bg-white rounded-t-lg border py-1 px-2 text-sm shadow-lg"
+                            @click="showPicker = false"
+                        >&times; close</button>
+                        <chrome-picker
+                            :value="color"
+                            @input="updateColor"
+                        ></chrome-picker>
+                    </div>
                 </div>
             </div>
         </div>
